@@ -1,0 +1,16 @@
+FROM python:3.9-slim
+# 使用官方提供的python开发镜像作为基础镜像
+
+WORKDIR llhtest-jenkins
+# 创建工作目录
+
+ADD . /llhtest-jenkins
+# 把Dockerflie文件所在目录的所有文件都复制到工作目录中
+RUN pip install -r requirements.txt
+# 安装这个应用所需要的依赖包
+
+EXPOSE 8089
+# 允许外界访问容器的6004端口
+
+CMD ["locust -f locusttest.py --host=https://www.cnblogs1.com/"]
+# 启动应用
